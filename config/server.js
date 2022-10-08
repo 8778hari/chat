@@ -14,10 +14,9 @@ app.use('/user',userRouter);
 app.use('/message',messageRouter)
 
 app.get('/',(req,res) =>{
-    res.send('HOŞGELDİNİZ');
+    res.send('Hi, there (chat-node-flutter-app');
 });
 
-server.listen(port_number);
-console.log('Server running on http://localhost:8080');
+server.listen(process.env.PORT || '8080', '0.0.0.0');
 
 module.exports = server;
