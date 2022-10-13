@@ -12,7 +12,7 @@ router.post('/signup', async (req, res) => {
     } else {
         const hash = await bcrypt.hash(value.password, 10); // hash işlemi
         value.password = hash;
-        User.create({ name: value.name, email: value.email, password: value.password, sex: value.sex, about: value.about }).then((document) => {
+        User.create({ name: value.name, email: value.email, password: value.password, sex: value.sex, about: value.about, contactNo: value.contactNo }).then((document) => {
             res.json({ message: true }); // Kullanıcı başarılı şekilde oluşturuldu.
         }).catch((error) => {
             res.send({ message: error.message });// kullanıcı oluşturulma işlemi başarısız.
@@ -69,6 +69,12 @@ router.post('/userinfo', (req, res) => {
     User.findOne({ token: token }, (err, document) => {
         res.send(document);
     });
+});
+
+router.post('/updateuser', (req, res) => {
+    // let token = req.body.id;
+    User.updateOne(req.body);
+    res.json({ message: true, }); // Kullanıcı başarılı şekilde oluşturuldu.
 });
 
 function createMD5(data) {
