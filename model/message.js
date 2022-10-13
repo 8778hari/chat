@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const contentSchema = new Schema({
-    ismy : Boolean,
+    ismy : Boolean,   
     message : String,
     image : String,
     isImage : Boolean

@@ -7,39 +7,44 @@ const userSchema = new Schema({
         type: String,
         unique: true
     },
-    token : {
-        type : String,
-        unique : true
+    token: {
+        type: String,
+        unique: true
     },
     password: {
-        type : String,
+        type: String,
     },
-    email : {
-        type : String,
-        unique : true
+    email: {
+        type: String,
+        unique: true
+    },
+    contactNo: {
+        type: String,
+        unique: true
     },
     sex: {
-        type : String,
-        enum : ['male','female'],
+        type: String,
+        enum: ['male', 'female'],
     },
     about: {
-        type : String,
+        type: String,
     },
     token: {
-        type : String,
+        type: String,
     }
 });
 
-userSchema.statics.signUpValidation = function(object){
+userSchema.statics.signUpValidation = function (object) {
     const sex = ["male", "female"];
     const schema = joi.object({
         name: joi.string().min(4).max(15).required(),
         password: joi.string().min(6).required(),
         email: joi.string().email().required().lowercase(),
-        sex : joi.string().required().valid(...sex),
-        about : joi.string(),
+        sex: joi.string().required().valid(...sex),
+        about: joi.string(),
+        contactNo: joi.string().min(10).max(10).required()
     });
     return schema.validate(object)
 }
 
-module.exports = mongoose.model('User',userSchema);
+module.exports = mongoose.model('User', userSchema);
